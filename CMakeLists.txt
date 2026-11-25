@@ -34,8 +34,16 @@ add_library(detector STATIC
 )
 target_link_libraries(detector PUBLIC screen_capture onnxruntime)
 
+add_library(mouse_controller STATIC
+    src/input/mouse_controller.cpp
+    src/input/mouse_controller.hpp
+)
+target_compile_features(mouse_controller PUBLIC cxx_std_17)
+target_include_directories(mouse_controller PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src")
+target_link_libraries(mouse_controller PRIVATE user32)
+
 add_executable(rocks_maj_farmer src/main.cpp)
-target_link_libraries(rocks_maj_farmer PRIVATE screen_capture detector user32)
+target_link_libraries(rocks_maj_farmer PRIVATE screen_capture detector mouse_controller user32)
 
 # Кладём onnxruntime.dll рядом с exe. Иначе Windows может подхватить
 # старую системную onnxruntime.dll из System32, и модель не загрузится.
@@ -46,7 +54,7 @@ add_custom_command(TARGET rocks_maj_farmer POST_BUILD
 
 if(MSVC)
     # /utf-8: исходники в UTF-8 (русские комментарии), без него MSVC читает их в кодировке ANSI.
-    foreach(target screen_capture detector rocks_maj_farmer)
+    foreach(target screen_capture detector mouse_controller rocks_maj_farmer)
         target_compile_options(${target} PRIVATE /W4 /permissive- /utf-8)
     endforeach()
 endif()

@@ -1,5 +1,6 @@
 #include "capture/screen_capture.hpp"
 #include "detection/detector.hpp"
+#include "input/mouse_controller.hpp"
 
 #ifndef NOMINMAX
 #define NOMINMAX
@@ -10,8 +11,10 @@
 #include <windows.h>
 
 #include <chrono>
+#include <cmath>
 #include <exception>
 #include <iostream>
+#include <thread>
 #include <vector>
 
 namespace {
@@ -21,6 +24,14 @@ constexpr rocks::CaptureRegion kGameArea{592, 264, 800, 448};
 
 // Путь к модели относительно папки, из которой запускаем программу.
 constexpr const char* kModelPath = "models/last.onnx";
+
+// Минимальная уверенность модели (0..1). Рамки ниже порога не считаем камушками.
+constexpr float kMinScore = 0.7f;
+
+// Время после запуска, чтобы переключиться на окно игры и убрать консоль с игровой области.
+constexpr std::chrono::seconds kStartDelay{3};
+// Пауза между кликами по соседним камушкам.
+constexpr std::chrono::milliseconds kDelayBetweenClicks{100};
 
 // Сколько миллисекунд прошло с момента started.
 double milliseconds_since(std::chrono::steady_clock::time_point started) {
@@ -36,7 +47,10 @@ int main() {
 
     try {
         // Модель грузим один раз, это самая долгая операция.
-        rocks::Detector detector(kModelPath);
+        rocks::Detector detector(kModelPath, kMinScore);
+
+        std::cout << "Switch to the game, starting in " << kStartDelay.count() << " s...\n";
+        std::this_thread::sleep_for(kStartDelay);
 
         auto started = std::chrono::steady_clock::now();
         const rocks::ScreenFrame frame = rocks::capture_screen(kGameArea);
@@ -48,12 +62,14 @@ int main() {
         std::cout << "Found " << gems.size() << " gems in " << milliseconds_since(started)
                   << " ms\n";
 
-        // Центр каждой рамки: сюда потом будем кликать.
+        // Кликаем по очереди в центр каждой рамки.
         for (const rocks::Detection& gem : gems) {
-            const float center_x = (gem.left + gem.right) / 2.0f;
-            const float center_y = (gem.top + gem.bottom) / 2.0f;
-            std::cout << "  gem at (" << center_x << ", " << center_y << "), score "
-                      << gem.score << '\n';
+            const int center_x = static_cast<int>(std::lround((gem.left + gem.right) / 2.0f));
+            const int center_y = static_cast<int>(std::lround((gem.top + gem.bottom) / 2.0f));
+            std::cout << "  click (" << center_x << ", " << center_y << "), score " << gem.score
+                      << '\n';
+            rocks::click_at(center_x, center_y);
+            std::this_thread::sleep_for(kDelayBetweenClicks);
         }
     } catch (const std::exception& error) {
         std::cerr << "Error: " << error.what() << '\n';
