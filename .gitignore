@@ -1,0 +1,13 @@
+.DS_Store
+/.tools/
+/dataset/
+/dataset_cropped/
+/Запустить Label Studio.command
+*.zip
+*.onnx
+*.pt
+
+/build/
+/out/
+/.vs/
+*.user
