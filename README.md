@@ -45,8 +45,8 @@
 ## 📦 Установка и сборка
 Клонируем репозиторий:
 ```
-git clone https://github.com/hm0on/rocks_maj_farmer.git
-cd rocks_maj_farmer
+git clone https://github.com/hm0on/Maj-Rocks-Bot.git
+cd Maj-Rocks-Bot
 ```
 
 Скачиваем со [страницы релизов ONNX Runtime](https://github.com/microsoft/onnxruntime/releases) архив `onnxruntime-win-x64-<версия>.zip` и распаковываем в `third_party/onnxruntime`, чтобы получилось так:
