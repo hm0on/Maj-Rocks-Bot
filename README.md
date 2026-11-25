@@ -1,6 +1,6 @@
 <div align="center">
   
-# <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjNnNWxjMWlkOGl6MnJ2NnpmeTUwc2RhMWptcTlmOGlyb2l0ZXBmZyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/y4nk5bgwpWL6T5Ax9y/giphy.gif" height=40/> Rocks Maj Farmer <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbGw0YXdwYnF0MWRlZGhqMGQ0Z243eHdnd3U0Z2hwczZibzI5aGhncyZlcD12MV9naWZzX3RyZW5kaW5nJmN0PWc/kZqbBT64ECtjy/giphy.gif" height=40 />
+# <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbm41bDNpd3l1bnlkcDFwbHB0OHMzY2ptdTRvMG43bmhuZWZkNDJ4aiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/ptIluiK86y7IEnKlmD/giphy.gif" height=40/> Rocks Maj Farmer <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExeng5ajVsaGp1eHV4OTMwODBiYW5nbDZzd3FrcGNnZG94OXNtdjZxNSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/MDm3lqnGrtf9nKPDhy/giphy.gif" height=40 />
 
 Бот для **Majestic RP** (GTA 5 RP) под Windows, который сам находит камушки на экране и кликает по ним.
 
