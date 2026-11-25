@@ -26,7 +26,7 @@ namespace {
 constexpr rocks::CaptureRegion kGameArea{592, 264, 800, 448};
 
 // Путь к модели относительно папки, из которой запускаем программу.
-constexpr const char* kModelPath = "models/last.onnx";
+constexpr const char* kModelPath = "models/gem.onnx";
 
 // Файл с кодом клавиши включения/выключения. Удали его, чтобы забиндить другую клавишу.
 constexpr const char* kToggleKeyPath = "toggle_key.txt";
