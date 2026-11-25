@@ -1,5 +1,6 @@
 .DS_Store
 /.tools/
+/third_party/
 /dataset/
 /dataset_cropped/
 /Запустить Label Studio.command
