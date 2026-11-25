@@ -11,7 +11,7 @@ add_library(screen_capture STATIC
 )
 target_compile_features(screen_capture PUBLIC cxx_std_17)
 target_include_directories(screen_capture PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src")
-target_link_libraries(screen_capture PRIVATE d3d11 dxgi user32)
+target_link_libraries(screen_capture PRIVATE user32 gdi32)
 
 if(MSVC)
     target_compile_options(screen_capture PRIVATE /W4 /permissive-)
